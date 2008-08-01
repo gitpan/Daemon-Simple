@@ -4,7 +4,7 @@ use 5.008001;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 # Preloaded methods go here.
 
@@ -34,11 +34,12 @@ sub init
 		if( $is_running )
 		{
 			print "$0 is Already running.\n";
+			exit; # stop here
 		}
 		else
 		{
 			# run
-			print "$0 is Started.\n";
+			print "$0 is Starting.\n";
 		}
 	}
 	elsif( $command eq 'stop' )
@@ -53,12 +54,12 @@ sub init
 			}
 			print "$0 (PID:$pid) is stopped.\n";
 			destroy_pidfile($pidfile);
-			exit;
 		}
 		else
 		{
 			print "$0 (PID:$pid) is Already stopped.\n";
 		}
+		exit; # stop here
 	}
 	
 	use Proc::Daemon;
@@ -116,7 +117,7 @@ __END__
 
 =head1 NAME
 
-Daemon::Simple - Perl extension for making script as daemon with start|stop controlling
+Daemon::Simple - Perl extension for making script as daemon with start|stop controlling on unix system
 
 =head1 SYNOPSIS
 

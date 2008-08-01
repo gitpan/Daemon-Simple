@@ -1,5 +1,9 @@
 Revision history for Perl extension Daemon::Simple.
 
+0.03  Fri Aug   1 2008
+    - bug fixed : no quiting on start-start, stop-stop, start-stop.
+	- explicit "on unix system"
+
 0.02  Tue Nov  13 2007
 	- added test cases;
 	- more simply by using File::Spec
