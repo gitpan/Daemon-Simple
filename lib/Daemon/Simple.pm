@@ -4,12 +4,11 @@ use 5.008001;
 use strict;
 use warnings;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 # Preloaded methods go here.
-
-require Proc::ProcessTable;
-require File::Spec;
+use Proc::ProcessTable;
+use File::Spec;
 # Daemon init
 sub init
 {
@@ -62,10 +61,15 @@ sub init
 		exit; # stop here
 	}
 	
-	use Proc::Daemon;
-	Proc::Daemon::Init;
-	create_pidfile($pidfile);
+        my $cpid = fork();
+        if( $cpid ){
+            exit;
+        }
 	chdir($homedir);
+        close(STDIN);
+        close(STDOUT);
+        close(STDERR);
+	create_pidfile($pidfile);
 }
 
 sub is_running

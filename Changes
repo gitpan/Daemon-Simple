@@ -1,4 +1,7 @@
 Revision history for Perl extension Daemon::Simple.
+0.04  Thu March 29 2012
+    - bug fixed : now working
+    - dependency remove : Daemon::Simple
 
 0.03  Fri Aug   1 2008
     - bug fixed : no quiting on start-start, stop-stop, start-stop.
