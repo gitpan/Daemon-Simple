@@ -4,7 +4,7 @@ use 5.008001;
 use strict;
 use warnings;
 
-our $VERSION = '0.04';
+our $VERSION = '0.1';
 
 # Preloaded methods go here.
 use Proc::ProcessTable;
@@ -87,8 +87,9 @@ sub get_pidfile
 	return 0 unless( -e$pidfile );
 	open(FILE, "$pidfile");
 	my $pid = <FILE>;
-	chomp($pid);
-	close(FILE);
+        die "Unexpected PID in $pidfile" unless $pid =~ /^(\d+)$/;
+        $pid = $1;
+        close(FILE);
 	return $pid;
 }
 
